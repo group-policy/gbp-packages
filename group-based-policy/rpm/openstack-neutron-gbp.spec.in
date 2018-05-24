@@ -47,6 +47,7 @@ gbp-db-manage --config-file /etc/neutron/neutron.conf upgrade head
 %{_bindir}/nfp
 %{_bindir}/nfp_proxy
 %{_bindir}/gbp-db-manage
+%{_bindir}/gbp-validate
 %{python2_sitelib}/gbpservice
 %{python2_sitelib}/group_based_policy*.egg-info
 %{_sysconfdir}/group-based-policy/policy.d/policy.json
@@ -55,6 +56,9 @@ gbp-db-manage --config-file /etc/neutron/neutron.conf upgrade head
 %{_sysconfdir}/nfp.ini
 
 %changelog
+* Thu May 24 2018 Robert Kukura <kukura@noironetworks.com> - 5.0.0-3
+- Add gbp-validate executable
+
 * Wed Jul 12 2017 Thomas Bachman <bachman@noironetworks.com> - 5.0.0-2
 - Remove service chain packaging for Newton
 
