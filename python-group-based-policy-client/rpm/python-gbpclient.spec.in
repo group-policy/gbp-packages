@@ -9,10 +9,10 @@ URL:		https://launchpad.net/group-based-policy-client
 Source0:	https://launchpad.net/group-based-policy-client/%{release_name}/%{version}/+download/python-group-based-policy-client-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python2-devel
-BuildRequires:	python-pbr
-BuildRequires:	python-setuptools
-Requires:	python-neutronclient
-Requires:	python-heatclient
+BuildRequires:	python2-pbr
+BuildRequires:	python2-setuptools
+Requires:	python2-neutronclient
+Requires:	python2-heatclient
 
 %description
 Client library and command line tool for interacting with OpenStack

@@ -9,8 +9,8 @@ URL:		https://launchpad.net/group-based-policy-ui
 Source0:	https://launchpad.net/group-based-policy-ui/%{release_name}/%{version}/+download/group-based-policy-ui-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python2-devel
-BuildRequires:	python-pbr
-BuildRequires:	python-setuptools
+BuildRequires:	python2-pbr
+BuildRequires:	python2-setuptools
 Requires:	python-django-horizon
 Requires:	python-gbpclient
 
