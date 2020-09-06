@@ -10,8 +10,8 @@ Source0:	https://launchpad.net/group-based-policy-automation/%{release_name}/%{v
 Patch0:		0001-remove-runtime-dependency-on-pbr.patch
 BuildArch:	noarch
 BuildRequires:	python2-devel
-BuildRequires:	python-pbr
-BuildRequires:	python-setuptools
+BuildRequires:	python2-pbr
+BuildRequires:	python2-setuptools
 Requires:	openstack-heat-engine
 Requires:	python-gbpclient
 
