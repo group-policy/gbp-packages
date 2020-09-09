@@ -1,6 +1,7 @@
 %define version_py @VERSION_PY@
+%global srcname openstack-neutron-gbp
 
-Name:		openstack-neutron-gbp
+Name:           %{srcname}
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
 Summary:	Group Based Policy service plugin for OpenStack Networking Service

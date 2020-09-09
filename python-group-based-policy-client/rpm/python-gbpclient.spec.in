@@ -1,6 +1,7 @@
 %define version_py @VERSION_PY@
+%global srcname python-gbpclient
 
-Name:		python-gbpclient
+Name:           %{srcname}
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
 Summary:	Python API and CLI for OpenStack Neutron Group Based Policy

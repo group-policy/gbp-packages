@@ -1,6 +1,8 @@
 %define version_py @VERSION_PY@
+%global srcname python-django-horizon-gbp
+%global src2name openstack-dashboard-gbp
 
-Name:		python-django-horizon-gbp
+Name:           %{srcname}
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
 Summary:	Django application for talking to OpenStack Group Based Policy
@@ -21,13 +23,13 @@ infrastructure automation. GBP complements the OpenStack networking
 model with the notion of policies that can be applied between groups
 of network endpoints.
 
-%package -n openstack-dashboard-gbp
+%package -n %{src2name}
 Summary:	Group Based Policy add-on for OpenStack Dashboard
 Requires:	openstack-dashboard
 Requires:	openstack-dashboard
-Requires:	python-django-horizon-gbp >= %{version}
+Requires:	%{srcname} >= %{version}
 
-%description -n openstack-dashboard-gbp
+%description -n %{src2name}
 OpenStack Dashboard UI add-on for Group Based Policy (GBP), which
 provides declarative abstractions for achieving scalable intent-based
 infrastructure automation. GBP complements the OpenStack networking
@@ -62,7 +64,7 @@ mv %{buildroot}%{python2_sitelib}/gbpui/_*_gbp_project_add_panel* \
 %{python2_sitelib}/gbpui
 %{python2_sitelib}/group_based_policy_ui*.egg-info
 
-%files -n openstack-dashboard-gbp
+%files -n %{src2name}
 %{_datadir}/openstack-dashboard/openstack_dashboard/enabled/*
 %{python2_sitelib}/gbpui/static/dashboard/js/*
 %{python2_sitelib}/gbpui/static/dashboard/css/*
