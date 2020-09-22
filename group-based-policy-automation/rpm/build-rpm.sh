@@ -35,6 +35,7 @@ rm -rf rpmbuild
 # Prepare build scripts for python3
 cp $SPEC_FILE_IN .
 
+sed -i "s/python-/python3-/g" $SPEC_FILE_IN
 sed -i "s/python2/python3/g" $SPEC_FILE_IN
 sed -i "s/Name:           %{srcname}/Name:           python3-%{srcname}/g" $SPEC_FILE_IN
 
