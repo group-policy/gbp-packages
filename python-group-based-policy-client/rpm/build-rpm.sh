@@ -27,9 +27,3 @@ python3 setup.py sdist --dist-dir $BUILD_DIR/SOURCES
 mv $BUILD_DIR/SOURCES/$NAME-$VERSION_PY.tar.gz $BUILD_DIR/SOURCES/$NAME-$VERSION.tar.gz
 rpmbuild --clean -ba --define "_topdir $BUILD_DIR" $BUILD_DIR/SPECS/$SPEC_FILE
 
-# restore the python2 packages
-mv *.src.rpm rpmbuild/SRPMS/
-mv *.noarch.rpm rpmbuild/RPMS/noarch/
-
-# Restore the spec file
-mv *.spec.in $SPEC_FILE_IN

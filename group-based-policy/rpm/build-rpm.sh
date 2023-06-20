@@ -27,9 +27,3 @@ mv $BUILD_DIR/SOURCES/$NAME-$VERSION_PY.tar.gz $BUILD_DIR/SOURCES/$NAME-$VERSION
 cp rpm/*.patch $BUILD_DIR/SOURCES
 rpmbuild --clean -ba --define "_topdir $BUILD_DIR" $BUILD_DIR/SPECS/$SPEC_FILE
 
-# restore the python2 packages
-mv *.src.rpm rpmbuild/SRPMS/
-mv *.noarch.rpm rpmbuild/RPMS/noarch/
-
-# Restore the spec file
-mv *.spec.in $SPEC_FILE_IN
