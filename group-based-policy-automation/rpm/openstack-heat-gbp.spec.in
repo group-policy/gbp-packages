@@ -1,7 +1,7 @@
 %define version_py @VERSION_PY@
 %global srcname openstack-heat-gbp
 
-Name:           %{srcname}
+Name:           python3-%{srcname}
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
 Summary:	Group Based Policy add-on for OpenStack Orchestration
@@ -10,11 +10,11 @@ URL:		https://launchpad.net/group-based-policy-automation
 Source0:	https://launchpad.net/group-based-policy-automation/%{release_name}/%{version}/+download/group-based-policy-automation-%{version}.tar.gz
 Patch0:		0001-remove-runtime-dependency-on-pbr.patch
 BuildArch:	noarch
-BuildRequires:	python2-devel
-BuildRequires:	python2-pbr
-BuildRequires:	python2-setuptools
+BuildRequires:	python3-devel
+BuildRequires:	python3-pbr
+BuildRequires:	python3-setuptools
 Requires:	openstack-heat-engine
-Requires:	python-gbpclient
+Requires:	python3-gbpclient
 
 %description
 Heat add-on for Group Based Policy (GBP), which provides declarative
@@ -33,18 +33,18 @@ sed -i 's/RPMVERSION/%{version}/' gbpautomation/__init__.py
 rm -f requirements.txt
 
 %build
-%{__python2} setup.py build
+%{__python3} setup.py build
 
 %install
-%{__python2} setup.py install -O1 --install-data / --skip-build --root %{buildroot}
+%{__python3} setup.py install -O1 --install-data / --skip-build --root %{buildroot}
 # Remove unused files
-rm -rf %{buildroot}%{python2_sitelib}/gbpautomation/heat/tests
+rm -rf %{buildroot}%{python3_sitelib}/gbpautomation/heat/tests
 
 %files
 %doc LICENSE
 %doc README.rst
-%{python2_sitelib}/gbpautomation
-%{python2_sitelib}/group_based_policy_automation*.egg-info
+%{python3_sitelib}/gbpautomation
+%{python3_sitelib}/group_based_policy_automation*.egg-info
 
 %changelog
 * Tue Sep 12 2017 Thomas Bachman <bachman@noironetworks.com> - 6.0.0-1
