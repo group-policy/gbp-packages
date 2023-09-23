@@ -1,5 +1,5 @@
 %define version_py @VERSION_PY@
-%global srcname python-gbpclient
+%global srcname python3-gbpclient
 
 Name:           %{srcname}
 Version:	@VERSION@
@@ -9,11 +9,11 @@ License:	ASL 2.0
 URL:		https://launchpad.net/group-based-policy-client
 Source0:	https://launchpad.net/group-based-policy-client/%{release_name}/%{version}/+download/python-group-based-policy-client-%{version}.tar.gz
 BuildArch:	noarch
-BuildRequires:	python2-devel
-BuildRequires:	python2-pbr
-BuildRequires:	python2-setuptools
-Requires:	python2-neutronclient
-Requires:	python2-heatclient
+BuildRequires:	python3-devel
+BuildRequires:	python3-pbr
+BuildRequires:	python3-setuptools
+Requires:	python3-neutronclient
+Requires:	python3-heatclient
 
 %description
 Client library and command line tool for interacting with OpenStack
@@ -27,19 +27,19 @@ rm -rf *.egg-info
 rm gbpclient/version.py
 
 %build
-%{__python2} setup.py build
+%{__python3} setup.py build
 
 %install
-%{__python2} setup.py install -O1 --skip-build --install-data / --root %{buildroot}
+%{__python3} setup.py install -O1 --skip-build --install-data / --root %{buildroot}
 # Remove unused files
-rm -rf %{buildroot}%{python2_sitelib}/gbpclient/tests
+rm -rf %{buildroot}%{python3_sitelib}/gbpclient/tests
 
 %files
 %doc LICENSE
 %doc README.rst
 %{_bindir}/gbp
-%{python2_sitelib}/gbpclient
-%{python2_sitelib}/python_group_based_policy_client-*.egg-info
+%{python3_sitelib}/gbpclient
+%{python3_sitelib}/python_group_based_policy_client-*.egg-info
 
 %changelog
 * Tue Sep 12 2017 Thomas Bachman <bachman@noironetworks.com> - 0.14.0-1

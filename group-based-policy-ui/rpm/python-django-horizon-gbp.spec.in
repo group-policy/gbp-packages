@@ -1,5 +1,5 @@
 %define version_py @VERSION_PY@
-%global srcname python-django-horizon-gbp
+%global srcname python3-django-horizon-gbp
 %global src2name openstack-dashboard-gbp
 
 Name:           %{srcname}
@@ -10,11 +10,11 @@ License:	ASL 2.0
 URL:		https://launchpad.net/group-based-policy-ui
 Source0:	https://launchpad.net/group-based-policy-ui/%{release_name}/%{version}/+download/group-based-policy-ui-%{version}.tar.gz
 BuildArch:	noarch
-BuildRequires:	python2-devel
-BuildRequires:	python2-pbr
-BuildRequires:	python2-setuptools
-Requires:	python-django-horizon
-Requires:	python-gbpclient
+BuildRequires:	python3-devel
+BuildRequires:	python3-pbr
+BuildRequires:	python3-setuptools
+Requires:	python3-django-horizon
+Requires:	python3-gbpclient
 
 %description
 Horizon Django application add-on for Group Based Policy (GBP), which
@@ -23,13 +23,13 @@ infrastructure automation. GBP complements the OpenStack networking
 model with the notion of policies that can be applied between groups
 of network endpoints.
 
-%package -n %{src2name}
+%package -n python3-%{src2name}
 Summary:	Group Based Policy add-on for OpenStack Dashboard
 Requires:	openstack-dashboard
 Requires:	openstack-dashboard
 Requires:	%{srcname} >= %{version}
 
-%description -n %{src2name}
+%description -n python3-%{src2name}
 OpenStack Dashboard UI add-on for Group Based Policy (GBP), which
 provides declarative abstractions for achieving scalable intent-based
 infrastructure automation. GBP complements the OpenStack networking
@@ -42,33 +42,33 @@ find gbpui -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 rm -f requirements.txt
 
 %build
-%{__python2} setup.py build
+%{__python3} setup.py build
 
 %install
-%{__python2} setup.py install -O1 --skip-build --install-data / --root %{buildroot}
+%{__python3} setup.py install -O1 --skip-build --install-data / --root %{buildroot}
 # Remove unused files
-rm -rf %{buildroot}%{python2_sitelib}/gbpui/horizon/tests
-rm -rf %{buildroot}%{python2_sitelib}/gbpui/openstack_dashboard/tests
+rm -rf %{buildroot}%{python3_sitelib}/gbpui/horizon/tests
+rm -rf %{buildroot}%{python3_sitelib}/gbpui/openstack_dashboard/tests
 # Relocate dashboard panels to /usr/share
 install -d -m 755 %{buildroot}%{_datadir}/openstack-dashboard/
 install -d -m 755 %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard
 install -d -m 755 %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/enabled
 install -d -m 755 %{buildroot}%{_datadir}/openstack-dashboard/static
 install -d -m 755 %{buildroot}%{_datadir}/openstack-dashboard/static/dashboard
-mv %{buildroot}%{python2_sitelib}/gbpui/_*_gbp_project_add_panel* \
+mv %{buildroot}%{python3_sitelib}/gbpui/_*_gbp_project_add_panel* \
    %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/enabled
 
 %files
 %doc LICENSE
 %doc README.rst
-%{python2_sitelib}/gbpui
-%{python2_sitelib}/group_based_policy_ui*.egg-info
+%{python3_sitelib}/gbpui
+%{python3_sitelib}/group_based_policy_ui*.egg-info
 
-%files -n %{src2name}
+%files -n python3-%{src2name}
 %{_datadir}/openstack-dashboard/openstack_dashboard/enabled/*
-%{python2_sitelib}/gbpui/static/dashboard/js/*
-%{python2_sitelib}/gbpui/static/dashboard/css/*
-%{python2_sitelib}/gbpui/static/dashboard/img/*
+%{python3_sitelib}/gbpui/static/dashboard/js/*
+%{python3_sitelib}/gbpui/static/dashboard/css/*
+%{python3_sitelib}/gbpui/static/dashboard/img/*
 
 %changelog
 * Tue Sep 12 2017 Thomas Bachman <bachman@noironetworks.com> - 6.0.0-1
