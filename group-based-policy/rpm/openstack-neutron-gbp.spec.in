@@ -48,6 +48,7 @@ gbp-db-manage --config-file /etc/neutron/neutron.conf upgrade head || true
 %{_bindir}/nfp_proxy
 %{_bindir}/gbp-db-manage
 %{_bindir}/gbp-validate
+%{_bindir}/hpp-normalize
 %{python2_sitelib}/gbpservice
 %{python2_sitelib}/group_based_policy*.egg-info
 %{_sysconfdir}/group-based-policy/policy.d/policy.json
@@ -56,6 +57,9 @@ gbp-db-manage --config-file /etc/neutron/neutron.conf upgrade head || true
 %{_sysconfdir}/nfp.ini
 
 %changelog
+* Thu Dec 06 2023 Thomas Bachman<tbachman@yahoo.com> - 6.0.0-3
+- Add hpp-normalize executable
+
 * Thu May 24 2018 Robert Kukura <kukura@noironetworks.com> - 6.0.0-2
 - Add gbp-validate executable
 
