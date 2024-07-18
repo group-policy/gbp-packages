@@ -1,0 +1,48 @@
+pipeline {
+    agent {
+        label 'noiro-build-101.cisco.com'
+    }
+    environment {
+        TMP_CLONE_DIR = '.tmp-clone'
+        BUILD_DIR = "${env.WORKSPACE}/rpmbuild"
+        RELEASE = "${env.BUILD_NUMBER}"
+        CHANGE_INFO_FILE = "${env.WORKSPACE}/change-info.txt"
+    }
+    stages {
+        stage('Clone Repositories') {
+            steps {
+                script {
+                    def repos = [
+                        "group-based-policy": "https://cto-github.cisco.com/noironetworks/group-based-policy.git",
+                        "group-based-policy-ui": "https://cto-github.cisco.com/noironetworks/group-based-policy-ui.git",
+                        "python-group-based-policy-client": "https://cto-github.cisco.com/noironetworks/python-group-based-policy-client.git",
+                        "group-based-policy-automation": "https://cto-github.cisco.com/noironetworks/group-based-policy-automation.git"
+                    ]                    
+                    sh "mkdir -p ${TMP_CLONE_DIR}"
+                    repos.each { name, url ->
+                        sh "git clone -b stable/train ${url} ${TMP_CLONE_DIR}/${name}"
+                    }
+                }
+            }
+        }
+        stage('Build RPMs and Collect Change Info') {
+            steps {
+                script {
+                    sh 'rm -f ${CHANGE_INFO_FILE}'
+                    def projects = ["group-based-policy", "group-based-policy-ui", "python-group-based-policy-client", "group-based-policy-automation"]
+                    projects.each { d ->
+                        dir("${TMP_CLONE_DIR}/${d}") {
+                            sh """
+                                mv ../../${d}/rpm .
+                                ./rpm/build-rpm.sh
+                                echo "*** ${d} ***" >> ${CHANGE_INFO_FILE}
+                                git log -n1 >> ${CHANGE_INFO_FILE}
+                                echo >> ${CHANGE_INFO_FILE}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
